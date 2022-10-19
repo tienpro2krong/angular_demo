@@ -1,1 +1,30 @@
-<p>main works!</p>
+<h1>{{ name }}</h1>
+<p>{{ name }}</p>
+<!-- <a href="{{ googleURL }}" target="_blank">Go to google</a> -->
+<a [href]="googleURL" target="_blank">Go to google</a>
+
+<br />
+<input type="text" value="{{ name }}" />
+<table>
+  <tr>
+    <th [attr.colspan]="colSpan">Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>$80</td>
+  </tr>
+  <tr>
+    <td colspan="2">Sum: $180</td>
+  </tr>
+</table>
+
+<button class="btn btn-danger" (click)="onBtnClick()">Click đi</button>
+<br />
+<button class="btn btn-warning" (click)="increase($event)">+</button>
+{{ count }}
+<button class="btn btn-primary" (click)="reduce()">-</button>
