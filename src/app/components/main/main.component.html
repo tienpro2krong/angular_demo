@@ -5,7 +5,9 @@
 
 <br />
 <input type="text" value="{{ name }}" />
-<table>
+<br />
+<br />
+<table class="table">
   <tr>
     <th [attr.colspan]="colSpan">Month</th>
     <th>Savings</th>
@@ -26,5 +28,70 @@
 <button class="btn btn-danger" (click)="onBtnClick()">Click đi</button>
 <br />
 <button class="btn btn-warning" (click)="increase($event)">+</button>
-{{ count }}
+<input type="text" value="{{ count }}" />
 <button class="btn btn-primary" (click)="reduce()">-</button>
+<br />
+<br />
+
+<div>
+  <input type="text" [(ngModel)]="name" (keyup.enter)="Addtwoway()" />
+  <button class="btn btn-primary" (click)="Addtwoway()">Add</button>
+</div>
+<ul>
+  <li
+    *ngFor="let item of listTodo; let o = index"
+    [class.completed]="item.completed"
+  >
+    {{ o + 1 }}. {{ this.item.name }}
+    <button type="submit" class="btn btn-danger" (click)="deletedTung(o)">
+      Deleted
+    </button>
+    <button type="submit" class="btn btn-warning" (click)="toogleTodoTung(o)">
+      Completed
+    </button>
+  </li>
+</ul>
+<div [ngSwitch]="colSpan">
+  <div *ngSwitchCase="1">output1</div>
+  <div *ngSwitchCase="2">output2</div>
+  <div *ngSwitchDefault>output3</div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-4">
+    <form>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter anything"
+          name="nameTodo"
+          [(ngModel)]="nameTodo"
+          (keyup.enter)="twowayAdd()"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="twowayAdd()">
+        Submit
+      </button>
+    </form>
+  </div>
+  <div>
+    <ul class="list-group" [hidden]="todos.length === 0">
+      <li
+        class="list-group-item"
+        *ngFor="let todo of todos; let i = index"
+        [class.completed]="todo.completed"
+        (click)="toogleTodo(i)"
+      >
+        {{ i + 1 }}. {{ this.todo.title }}
+        <button type="submit" class="btn btn-danger" (click)="deletedTodo()">
+          Deleted
+        </button>
+      </li>
+    </ul>
+
+    <p class="text-center" [hidden]="todos.length > 0">No to do</p>
+  </div>
+</div>
