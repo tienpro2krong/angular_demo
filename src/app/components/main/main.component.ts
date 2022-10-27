@@ -79,13 +79,19 @@ export class MainComponent implements OnInit {
   }
 
   twowayAdd() {
-    this.todos.push({
+    var createTodo = {
       userId: 1,
       id: 1,
       title: this.nameTodo,
       completed: false,
-    });
-    this.name = '';
+    };
+    this.nameTodo = '';
+    this.todoService.addCreateTodo(createTodo).subscribe(
+      (res: Todo) => {
+        this.todos.unshift(res);
+      },
+      (err) => {}
+    );
   }
   deletedTodo(index) {
     this.todoService

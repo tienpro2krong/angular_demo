@@ -80,7 +80,7 @@
   <div>
     <ul class="list-group" *ngIf="todos.length > 0">
       <li
-        class="list-group-item d-flex justify-content-between"
+        class="text-capitalize list-group-item d-flex justify-content-between"
         *ngFor="let todo of todos; let i = index"
       >
         <div (click)="toogleTodo(i)" [class.completed]="todo.completed">

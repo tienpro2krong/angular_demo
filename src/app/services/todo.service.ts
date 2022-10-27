@@ -11,8 +11,7 @@ export interface Todo {
   providedIn: 'root',
 })
 export class TodoService {
-  todos: Todo[] = [];
-  private baseURL = 'https://jsonplaceholder.typicode.com/';
+  private baseURL = 'https://jsonplaceholder.typicode.com';
   // todos: Todo[] = [
   //   {
   //     userId: 1,
@@ -47,5 +46,9 @@ export class TodoService {
   }
   deleteTodo(id) {
     return this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  }
+
+  addCreateTodo(todo) {
+    return this.http.post(this.baseURL + '/todos', todo);
   }
 }
