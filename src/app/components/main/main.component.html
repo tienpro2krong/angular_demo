@@ -78,20 +78,21 @@
     </form>
   </div>
   <div>
-    <ul class="list-group" [hidden]="todos.length === 0">
+    <ul class="list-group" *ngIf="todos.length > 0">
       <li
-        class="list-group-item"
+        class="list-group-item d-flex justify-content-between"
         *ngFor="let todo of todos; let i = index"
-        [class.completed]="todo.completed"
-        (click)="toogleTodo(i)"
       >
-        {{ i + 1 }}. {{ this.todo.title }}
-        <button type="submit" class="btn btn-danger" (click)="deletedTodo()">
+        <div (click)="toogleTodo(i)" [class.completed]="todo.completed">
+          {{ i + 1 }}. {{ this.todo.title }}
+        </div>
+
+        <button type="submit" class="btn btn-danger" (click)="deletedTodo(i)">
           Deleted
         </button>
       </li>
     </ul>
 
-    <p class="text-center" [hidden]="todos.length > 0">No to do</p>
+    <p class="text-center" *ngIf="todos.length === 0">No to do</p>
   </div>
 </div>

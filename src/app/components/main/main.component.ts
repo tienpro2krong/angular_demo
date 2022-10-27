@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService, Todo } from '../../services/todo.service';
 import { title } from 'process';
+import { PostService, Post } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +14,9 @@ export class MainComponent implements OnInit {
   colSpan = 4;
   count: number = 0;
   selectedNavTab = 'Tab1';
-  nameTodo: string;
+  nameTodo: string = '';
+  todos: Todo[] = [];
+  post: Post[] = [];
 
   listTodo: {
     userId: number;
@@ -27,41 +31,18 @@ export class MainComponent implements OnInit {
       completed: false,
     },
   ];
-  todos: {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
-  }[] = [
-    {
-      userId: 1,
-      id: 1,
-      title: 'oooooooooooooooo',
-      completed: false,
-    },
-    {
-      userId: 2,
-      id: 2,
-      title: 'aaaaaaaaaaaaaaaaa',
-      completed: false,
-    },
-    {
-      userId: 3,
-      id: 3,
-      title: 'zzzzzzzzzzzzzzzzzzzzz',
-      completed: false,
-    },
-    {
-      userId: 4,
-      id: 4,
-      title: 'qqqqqqqqqqqqqqqqqqqqq',
-      completed: false,
-    },
-  ];
 
-  constructor() {}
+  constructor(private todoService: TodoService) {
+    // postService.getAllPost().subscribe((res: Post[]) => {
+    //   this.post = res;
+    // });
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todoService.getAllTodos().subscribe((res: Todo[]) => {
+      this.todos = res;
+    });
+  }
 
   onBtnClick() {
     console.log('Clicked');
@@ -102,15 +83,28 @@ export class MainComponent implements OnInit {
       userId: 1,
       id: 1,
       title: this.nameTodo,
-      completed: true,
+      completed: false,
     });
-    // this.name = '';
+    this.name = '';
   }
   deletedTodo(index) {
+    this.todoService
+      .deleteTodo(this.todos[index].id as Number)
+      .subscribe((res) => {});
     this.todos.splice(index, 1);
   }
   toogleTodo(index) {
     this.todos[index].completed = !this.todos[index].completed;
     console.log(this.todos[index].completed);
+  }
+
+  postAdd() {
+    this.post.push({
+      userId: 1,
+      id: 1,
+      title: this.nameTodo,
+      body: '',
+    });
+    this.name = '';
   }
 }
