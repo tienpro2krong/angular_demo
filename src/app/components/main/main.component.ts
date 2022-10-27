@@ -17,6 +17,9 @@ export class MainComponent implements OnInit {
   nameTodo: string = '';
   todos: Todo[] = [];
   post: Post[] = [];
+  today: Date = new Date();
+
+  price: number = 1.99999;
 
   listTodo: {
     userId: number;
