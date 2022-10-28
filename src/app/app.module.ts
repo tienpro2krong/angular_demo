@@ -25,6 +25,11 @@ import { HomeComponent } from './components/home/home.component';
     HttpClientModule,
     RouterModule.forRoot([
       {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
+      {
         path: 'home',
         component: HomeComponent,
       },
