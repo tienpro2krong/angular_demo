@@ -10,6 +10,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     MainComponent,
     HomeComponent,
+    TodoDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,10 @@ import { HomeComponent } from './components/home/home.component';
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'todos/:id',
+        component: TodoDetailComponent,
       },
       {
         path: 'todos',

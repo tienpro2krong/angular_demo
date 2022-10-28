@@ -78,19 +78,25 @@
       </button>
     </form>
   </div>
-  <div>
+  <div class="mt-4">
     <ul class="list-group" *ngIf="todos.length > 0">
       <li
         class="text-capitalize list-group-item d-flex justify-content-between"
         *ngFor="let todo of todos; let i = index"
       >
-        <div (click)="toogleTodo(i)" [class.completed]="todo.completed">
-          {{ i + 1 }}. {{ this.todo.title }}
-        </div>
-
-        <button type="submit" class="btn btn-danger" (click)="deletedTodo(i)">
-          Deleted
-        </button>
+        <span>
+          <div (click)="toogleTodo(i)" [class.completed]="todo.completed">
+            {{ i + 1 }}. {{ this.todo.title }}
+          </div>
+        </span>
+        <span>
+          <button class="btn btn-info mr-3" [routerLink]="['/todos', todo.id]">
+            Show Detail
+          </button>
+          <button type="submit" class="btn btn-danger" (click)="deletedTodo(i)">
+            Deleted
+          </button>
+        </span>
       </li>
     </ul>
 
