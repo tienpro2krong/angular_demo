@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
+  private tokenKey: string = 'token';
   constructor(private htpp: HttpClient) {}
   login(user) {
     return this.htpp.post('https://reqres.in/api/login', user);
   }
   isLogin() {
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem(this.tokenKey);
     if (token) {
       return true;
     } else {
@@ -18,6 +19,12 @@ export class AuthService {
     }
   }
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.tokenKey);
+  }
+  getToken() {
+    let token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      return token;
+    }
   }
 }
