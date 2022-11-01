@@ -16,12 +16,21 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav w-100">
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/home']">Home </a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/todos']">Todo </a>
+        </li>
+        <li class="nav-item active ml-auto" *ngIf="!authService.isLogin()">
+          <a class="nav-link" [routerLink]="['/login']">Login </a>
+        </li>
+        <li class="nav-item active" *ngIf="!authService.isLogin()">
+          <a class="nav-link" [routerLink]="['/signUp']">SignUp </a>
+        </li>
+        <li class="nav-item active ml-auto" *ngIf="authService.isLogin()">
+          <a class="nav-link" href (click)="authService.logout()">LoggOut </a>
         </li>
       </ul>
     </div>

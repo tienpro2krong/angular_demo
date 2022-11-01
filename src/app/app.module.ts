@@ -1,9 +1,10 @@
+import { AuthInterceptor } from './auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -11,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
     MainComponent,
     HomeComponent,
     TodoDetailComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,10 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
         path: '',
         redirectTo: '/home',
         pathMatch: 'full',
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
       },
       {
         path: 'home',
@@ -45,7 +52,13 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
       },
     ]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
